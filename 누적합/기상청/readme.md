@@ -31,13 +31,19 @@
 2. input값을 받을 때 줄이 받는 속성이 서로 다를 경우
     - 라인별로 먼저 나눈다
       ```javascript
+      input = '2 3\n1 2 3 4 5 6 7 8 9'
+
       const lines = input.split('\n')
+      // return [2 3]
+      //        [1 2 3 4 5 6 7 8 9]
       ```
     - 1번째 줄 먼저 정의(dyas, continuos)
       ```javascript
       const [days, continuos] = lines[0].split(' ').map(Number)
+      // [2, 3]
       ``` 
     - 2번째 줄 먼저 정의(temperatures)
       ```javascript
       const temperatures = lines[1].split(' ').map(Number)
+      // return [1, 2, 3, 4, 5, 6, 7, 8, 9]
       ```
