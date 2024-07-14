@@ -2,7 +2,7 @@
 - N개의 정수가 주어지고, K개의 합 중 가장 큰 수를 구하여라.
 
 ## 풀이전략
-1. sliding window algoritm
+1. [sliding window algoritm](https://github.com/jamm0316/programers-codingtest/wiki/sliding-window-algoritm)
     - 일정구간을 갖는 윈도우를 옮겨가며 누적합을 구하는 알고리즘
     - 시간복잡도 : O(n)
 2. 각 숫자 순회하며 누적합 구하기
