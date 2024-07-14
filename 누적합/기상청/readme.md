@@ -6,6 +6,7 @@
     - 일정구간을 갖는 윈도우를 옮겨가며 누적합을 구하는 알고리즘
     - 시간복잡도 : O(n)
 2. 각 숫자 순회하며 누적합 구하기
+    - [reduce](https://github.com/jamm0316/programers-codingtest/wiki/Array.reduce()) 메서드 이용
     - 배열의 모든 구간을 순회하며, 매 회차마다 누적합을 다시 구한다.
     - 시간복잡도 : O(n * K)
 
