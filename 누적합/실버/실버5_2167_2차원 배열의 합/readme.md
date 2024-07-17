@@ -53,8 +53,7 @@ page link : https://www.acmicpc.net/problem/2167
         | 18 | 35 | 59 | 86 | 116 |
     3. (0, 0) ~ (3, 2) 구하는법
         
-        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/6b8d40ba-5287-42be-84df-56b1c96a2c05/1beaf6e7-ae2b-4ea6-b810-04dfbac55df6/Untitled.png)
-        
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/6b8d40ba-5287-42be-84df-56b1c96a2c05/1beaf6e7-ae2b-4ea6-b810-04dfbac55df6/Untitled.png)        
     4. 따라서 누적합 배열 공식
         
         ```jsx
@@ -75,8 +74,7 @@ page link : https://www.acmicpc.net/problem/2167
         | 18(B) | 35 | 59(A) | 86 | 116 |
     2. (2, 2) ~ (3, 2) 구하는법
         
-        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/6b8d40ba-5287-42be-84df-56b1c96a2c05/7ff4dcd1-dc90-4193-b2c5-993145a2a283/Untitled.png)
-        
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/6b8d40ba-5287-42be-84df-56b1c96a2c05/7ff4dcd1-dc90-4193-b2c5-993145a2a283/Untitled.png)        
     3. 따라서, `(i, j) ~ (x, y)` 까지의 합
         
         ```jsx
