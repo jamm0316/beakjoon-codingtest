@@ -1,17 +1,6 @@
 page link : https://www.acmicpc.net/problem/2167
 
-<aside>
-📄 목차
-
-</aside>
-
----
-
 # 풀이전략
-
-<aside>
-💡 풀이전략
-
 1. conputePrefixSum 함수 사용
     1. 배열로 matrix 생성
         
@@ -30,9 +19,8 @@ page link : https://www.acmicpc.net/problem/2167
         | 0 | 9 | 27 | 63 |
 3. main함수 사용
     1. 각 쿼리에 따른 결과값 도출
-</aside>
 
-### 배열의 합이란 개념 적립하기
+## 배열의 합이란 개념 적립하기
 
 - 배열의 합이란?
     - 배열의 좌표값이 주어질 때, 4개 좌표값(i, j), (x, y)으로 형성되는 사각형 내 요소 값을 모두 더한 것.
@@ -53,14 +41,15 @@ page link : https://www.acmicpc.net/problem/2167
         | 18 | 35 | 59 | 86 | 116 |
     3. (0, 0) ~ (3, 2) 구하는법
         
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/6b8d40ba-5287-42be-84df-56b1c96a2c05/1beaf6e7-ae2b-4ea6-b810-04dfbac55df6/Untitled.png)        
+![image](https://github.com/user-attachments/assets/7f466993-2bd4-4aca-a699-67685930e977)
+        <br>
     4. 따라서 누적합 배열 공식
         
-        ```jsx
-        prefixSum[x][y] = array[x][y]
-                        + prefixSum[x - 1][y]
-                        + prefixSum[x][y - 1]
-                        - prefixSum[x - 1][y - 1]
+        ```javasript
+        const prefixSum[x][y] = array[x][y]
+                              + prefixSum[x - 1][y]
+                              + prefixSum[x][y - 1]
+                              - prefixSum[x - 1][y - 1]
         ```
         
     
@@ -74,14 +63,15 @@ page link : https://www.acmicpc.net/problem/2167
         | 18(B) | 35 | 59(A) | 86 | 116 |
     2. (2, 2) ~ (3, 2) 구하는법
         
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/6b8d40ba-5287-42be-84df-56b1c96a2c05/7ff4dcd1-dc90-4193-b2c5-993145a2a283/Untitled.png)        
+![image](https://github.com/user-attachments/assets/85cc161d-ff7b-4c90-992b-b930f21e187b)
+    <br>
     3. 따라서, `(i, j) ~ (x, y)` 까지의 합
-        
-        ```jsx
-        subSum[x][y] = prefixSum[x][y]
-                     - prefixSum[i - 1][y]
-                     - prefixSum[x][j - 1]
-                     + prefixSum[i - 1][j - 1]
+
+        ```javascript
+        const subSum[x][y] = prefixSum[x][y]
+                           - prefixSum[i - 1][y]
+                           - prefixSum[x][j - 1]
+                           + prefixSum[i - 1][j - 1]
         ```
         
 
@@ -90,11 +80,6 @@ page link : https://www.acmicpc.net/problem/2167
 # pseudo code
 
 ```
-pseudo code for english
-step 1. Function to compute prefix sum array
-step 2. Function to calculate sum of sub-matrix using prefix sum array
-step 3. Main function to read input and process the queries
-
 1. 입력을 읽는다.
     a. 배열 크기 N, M을 읽는다.
     b. N x M 크기의 배열을 읽는다.
