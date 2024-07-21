@@ -1,4 +1,5 @@
 page link : https://www.acmicpc.net/problem/2003
+
 ---
 
 # 풀이전략
@@ -66,7 +67,7 @@ print(two_pointer(N, M, A))
 
 - map함수의 경우 객체의 주솟값을 반환하므로, list()함수를 통해 배열의 형태로 변환해 주어야 데이터로써 사용이 가능하다.
 
-## QnA
+## ❓QnA
 
 [질문저장소](https://www.notion.so/a4479cecccbe4a4189bace9ca9dea888?pvs=21)
 
