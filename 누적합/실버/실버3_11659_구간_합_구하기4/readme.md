@@ -143,41 +143,41 @@ for i in range(1, N + 1):
 
 ### 기존 code
     
-    ```python
-    import sys
+```python
+import sys
+
+# 인자 받기
+input = sys.stdin.read()
+
+# 함수 정의
+def main():
+    data = input.split()
+    N = data[0]
+    M = data[1]
     
-    # 인자 받기
-    input = sys.stdin.read()
+    # 배열 만들기
+    numbers = [map(int, data[2 : N + 2])]
     
-    # 함수 정의
-    def main():
-        data = input.split()
-        N = data[0]
-        M = data[1]
-        
-        # 배열 만들기
-        numbers = [map(int, data[2 : N + 2])]
-        
-        # queries 정의
-        queries = []
-        for i in range(N + 2, len(data), 2):
-            queries.append((int(data[i]), int(data[i + 1])))
-        
-        # 누적합 배열 만들기
-        prefix_sum = [0] * (N + 1)
-        for i in range(1, N + 1):
-            prefix_sum = numbers[i - 1] + prefix_sum[i - 1]
-        
-        # querie에 따른 누적합 구하기
-        results = []
-        for i, j in queries:
-            result = prefix_sum[j] - prefix_sum[i - 1]
-            results.append(result)
-        
-        return '\n'.join(map(str, results))
+    # queries 정의
+    queries = []
+    for i in range(N + 2, len(data), 2):
+        queries.append((int(data[i]), int(data[i + 1])))
     
-    print(main())
-    ```
+    # 누적합 배열 만들기
+    prefix_sum = [0] * (N + 1)
+    for i in range(1, N + 1):
+        prefix_sum = numbers[i - 1] + prefix_sum[i - 1]
+    
+    # querie에 따른 누적합 구하기
+    results = []
+    for i, j in queries:
+        result = prefix_sum[j] - prefix_sum[i - 1]
+        results.append(result)
+    
+    return '\n'.join(map(str, results))
+
+print(main())
+```
 
 ---
 
