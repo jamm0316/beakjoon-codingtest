@@ -1,5 +1,5 @@
 
-page link : 
+page link : [https://www.acmicpc.net/problem/2559](https://www.acmicpc.net/problem/2559)
 
 # 풀이전략
 
