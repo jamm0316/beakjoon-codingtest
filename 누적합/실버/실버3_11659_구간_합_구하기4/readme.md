@@ -86,12 +86,13 @@ numbers = [map(int, data[2 : N + 2])]
 
 - 수정된 코드
 ```python
-1. list comprehension
+# 1. list comprehension
 # 반복문을 통해 data를 순회하며 값 appending
 numbers = [int(data[i]) for i in range(2, N + 2)]
 
+
+# 2. list 함수 사용
 # data 리스트를 slicing한 후 map을 통해 int로 appending
-2. list 함수 사용
 numbers = list(map(int, data[2 : N + 2])
 ```
 
