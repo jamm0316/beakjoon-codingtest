@@ -18,7 +18,7 @@ page link : [https://www.acmicpc.net/problem/1806](https://www.acmicpc.net/probl
 3.  array_length에서 최소 를 반환한다.
     1. min(results)를 통해 가장 작은 수를 반환한다.
     2. 반약 results가 비어있다면 0을 반환한다.
-</aside>
+
 
 ## 🎨 사용된 알고리즘
 투 포인터(two pointer)
@@ -60,6 +60,44 @@ if results:
 else:
     print(0)
 ```
+
+<details>
+<summary><b>기존코드</b></summary>
+    <div markdown="1">
+        
+```python
+import sys
+input = sys.stdin.read
+
+#데이터 받기
+data = list(map(int, input.split()))
+N = data[0]
+TARGET = data[1]
+A = data[2 : N+2]
+
+#각 인자 초기화
+start = 0
+current_sum = 0
+array_length = 0
+results = []
+
+#배열 탐색
+for end in range(N):
+    current_sum += A[end]
+
+    while current_sum > 15 and end <= N:
+        start += 1
+        current_sum = 0
+
+    if current_sum == TARGET:
+        array_length = end - start + 1
+        results.append(array_length)
+
+print(results)
+```
+
+</div>
+</details>
 
 ## 해결한 오류
 
