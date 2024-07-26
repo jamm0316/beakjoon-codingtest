@@ -1,5 +1,3 @@
----
-
 page link : [https://www.acmicpc.net/problem/2143](https://www.acmicpc.net/problem/2143)
 
 ---
