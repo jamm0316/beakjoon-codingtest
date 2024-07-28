@@ -82,8 +82,8 @@ for i in range(N):
     else:  # 종유석
         obstacles_top[A[i] - 1] += 1
 
-obstacles_bottom.reverse()  # 빈공간 부터 더해줘야 함(#그림_1)
-obstacles_top.reverse()  # 빈공간 부터 더해줘야 함(#그림_1)
+obstacles_bottom.reverse()  # 빈공간 부터 더해줘야 함
+obstacles_top.reverse()  # 빈공간 부터 더해줘야 함
 
 # 석순과 종유석의 누적 합 계산
 for i in range(1, H):  # 0번째 수는 고정
