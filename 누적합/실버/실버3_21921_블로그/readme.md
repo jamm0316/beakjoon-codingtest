@@ -22,29 +22,29 @@ page link : [https://www.acmicpc.net/problem/21921](https://www.acmicpc.net/prob
 
 ## pseudo code
 
-```python
-	1.	입력 읽기:
-			1.	N: 블로그 시작일수
-			2.	X: 윈도우 범위
-			3.	A: 날짜별 유입량
-	2.	초기화:
-			1.	current_sum을 첫 X일의 합으로 초기화
-			2.	max_sum을 current_sum으로 초기화
-			3.	max_count를 1로 초기화
-	3.	슬라이딩 윈도우 계산:
-			1.	for i X ~ N:
-					1.	current_sum 갱신 (새로 추가되는 값 더하고, 제외되는 값 뺌)
-					2.	if current_sum > max_sum:
-							•	max_sum 갱신
-							•	max_count를 1로 설정
-					3.	elif current_sum == max_sum:
-							•	max_count 증가
-	4.	결과 출력:
-			1.	if max_sum == 0:
-					•	“SAD” 출력
-			2.	else:
-					•	max_sum 출력
-					•	max_count 출력
+```plaintext
+1. 입력 읽기:
+    1. N: 블로그 시작일수
+    2. X: 윈도우 범위
+    3. A: 날짜별 유입량
+2. 초기화:
+    1. current_sum을 첫 X일의 합으로 초기화
+    2. max_sum을 current_sum으로 초기화
+    3. max_count를 1로 초기화
+3. 슬라이딩 윈도우 계산:
+    1. for i X ~ N:
+        1. current_sum 갱신 (새로 추가되는 값 더하고, 제외되는 값 뺌)
+        2. if current_sum > max_sum:
+            • max_sum 갱신
+            • max_count를 1로 설정
+        3. elif current_sum == max_sum:
+            • max_count 증가
+        4. 결과 출력:
+            1. if max_sum == 0:
+                • “SAD” 출력
+            2. else:
+                • max_sum 출력
+                • max_count 출력
 ```
 
 ---
