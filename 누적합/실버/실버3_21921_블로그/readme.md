@@ -92,19 +92,19 @@ else:
 
 - 기존의 경우 시간복잡도 O(N) + O(N)으로, prefix_sum을 불필요하게 사용하여 코드가 복잡해짐
 
-```python
-...
-# prefix_sum 구축
-prefix_sum = [0] * N
-prefix_sum[0] = A[0]
-for i in range(1, N):
-    prefix_sum[i] = A[i] + prefix_sum[i - 1]
-
-# 슬라이딩 윈도우
-for end in range(X - 1, N):
-    # current_sum 초기화 및 업데이트
-...
-```
+    ```python
+    ...
+    # prefix_sum 구축
+    prefix_sum = [0] * N
+    prefix_sum[0] = A[0]
+    for i in range(1, N):
+        prefix_sum[i] = A[i] + prefix_sum[i - 1]
+    
+    # 슬라이딩 윈도우
+    for end in range(X - 1, N):
+        # current_sum 초기화 및 업데이트
+    ...
+    ```
 
 - **슬라이딩 윈도우 기법 사용**
     - Prefix Sum을 사용하여 구간 합을 구하는 방식 대신 슬라이딩 윈도우 기법을 사용하여 윈도우의 합을 유지하고 이동하면서 합을 갱신.
