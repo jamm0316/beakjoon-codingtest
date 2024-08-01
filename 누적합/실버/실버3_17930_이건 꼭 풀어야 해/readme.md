@@ -1,4 +1,4 @@
-page link : [https://www.acmicpc.net/status?user_id=jamm0316&problem_id=17390&from_mine=1](https://www.acmicpc.net/status?user_id=jamm0316&problem_id=17390&from_mine=1)
+page link : [https://www.acmicpc.net/problem/17390](https://www.acmicpc.net/problem/17390)
 
 ---
 
