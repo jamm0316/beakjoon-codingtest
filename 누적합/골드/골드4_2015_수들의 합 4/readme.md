@@ -8,15 +8,16 @@ page link : [https://www.acmicpc.net/problem/2015](https://www.acmicpc.net/probl
     1. 누적합 `Si` - (i보다 작은 수 j) `Sj` 의 누적합 = `부분합` 
         1. 여기서 `부분합`이 `K`이면 `count`
             
-            $$
-            S_i-S_j=K
-            $$
+        $$
+        S_i-S_j=K
+        $$
             
-        2. 따라서 누적합 `Si - K = Sj` 라면 `count`
-            
-            $$
-            S_i - K = S_j
-            $$
+        2. 따라서 누적합 `Si - K = Sj` 라면 `count`<br>
+      
+        $$
+        S_i - K = S_j
+        $$
+           
 
 ## 🎨 사용된 알고리즘
 - prefix_sum(누적합): 배열을 순회하면서 현재까지의 누적합을 계산.
