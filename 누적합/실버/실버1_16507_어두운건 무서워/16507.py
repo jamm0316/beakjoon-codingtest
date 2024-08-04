@@ -2,6 +2,8 @@ import sys
 
 input = sys.stdin.read()
 lines = input.split('\n')
+
+# 입력값 받기
 R, C, K = list(map(int, lines[0].split()))
 A = []
 for line in range(1, R + 1):
