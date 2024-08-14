@@ -33,7 +33,7 @@ page link : [https://www.acmicpc.net/problem/2578](https://www.acmicpc.net/probl
 
 ## 🎨 사용된 알고리즘
 
->! tip
+>! [tip]
 > 구현(implement)
 > 시뮬레이션(Simulation)
 
