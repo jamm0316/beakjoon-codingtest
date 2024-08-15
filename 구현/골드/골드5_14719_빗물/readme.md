@@ -13,7 +13,7 @@ page link : [https://www.acmicpc.net/problem/14719](https://www.acmicpc.net/prob
 ## 🎨 사용된 알고리즘
 
 > [!tip]
-> 구현(implement)
+> 구현(implement)<br>
 > 시뮬레이션(Simulation)
 ---
 
