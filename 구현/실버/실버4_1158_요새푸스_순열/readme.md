@@ -28,7 +28,7 @@ page link : [https://www.acmicpc.net/problem/1158](https://www.acmicpc.net/probl
     
 ## 🎨 사용된 알고리즘
 > [!tip]
-> 🎨 algoritm
+> 🎨 algoritm <br>
 > 구현(implement)
 
 ---
