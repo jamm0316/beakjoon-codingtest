@@ -15,9 +15,7 @@ class Josephus:
         data = list(map(int, input.split()))
         self.N = data[0]
         self.K = data[1]
-        self.A = []
-        for i in range(self.N):
-            self.A.append(i + 1)
+        self.A = list(range(1, self.N + 1))
 
     def itinerate(self):
         index = 0
