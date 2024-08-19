@@ -80,9 +80,10 @@ if __name__ == '__main__':
 
 따라서, 배열 안에서 기준점을 잡고, 그 뒤로 몇번째 떨어진 인덱스인지 계산
 
-`index = 기준 + 떨어진 거리`
-
-`index = index + self.K - 1`
+```python
+index = 기준 + 떨어진 거리
+index = index + self.K - 1
+```
 
 
 ---
@@ -92,9 +93,10 @@ if __name__ == '__main__':
 
 따라서, 모듈러를 통해 인덱스가 증가해도 배열안을 계속해서 순환할 수 있게 함.
 
-`index = (기준 + 떨어진 거리) % (현재 배열의 길이)`
-
-`index = (index + self.K - 1) % len(self.A)`
+```python
+index = (기준 + 떨어진 거리) % (현재 배열의 길이)
+index = (index + self.K - 1) % len(self.A)
+```
 
 ### 2. print("a", "b", "c")와 print("a" + "b" + "c") 의 차이점
 ```python
