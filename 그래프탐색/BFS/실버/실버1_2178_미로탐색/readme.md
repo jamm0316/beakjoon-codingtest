@@ -66,8 +66,7 @@ if __name__ == '__main__':
 
 ## 해결한 오류
 
-### 1. 코드 중복 제거 - 
-`def __i**nit__**(self)` 시 parsing 메서드 호출로
+### 1. 코드 중복 제거 - `def __i**nit__**(self)` 시 parsing 메서드 호출로
 
 - `parse_data`와 `__init__` 함수를 나누어 사용
     
