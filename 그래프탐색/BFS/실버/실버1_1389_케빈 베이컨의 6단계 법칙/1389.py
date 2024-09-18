@@ -1,7 +1,8 @@
+import sys
 from collections import deque
 
 def main():
-    input_data = '5 5\n1 3\n1 4\n4 5\n4 3\n3 2'
+    input_data = sys.stdin.read()
     converter = LawOfSix(input_data)
     converter.find_min_bacon_number()
 
