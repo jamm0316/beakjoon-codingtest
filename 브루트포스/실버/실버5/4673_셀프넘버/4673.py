@@ -1,19 +1,18 @@
+# 전체 수 정의
+all_number = set(range(1, 10001))
+
+# 생성자가 있는 수 정의
 def d(n):
-    result = n
-    while n > 0:
-        result += n % 10  # 마지막 자리수 더하기
-        n //= 10 # 한자리수 씩 왼쪽으로 옮기기
-    return result
+    sum_number = sum(map(int, str(n)))
+    return sum_number + n
 
-# 전체 숫자초기화와 generated_number 정의
-self_number = set(range(1, 10001))
-generated_number = set()
-for i in range(1, 10001):
-    generated_number.add(d(i))    
+constructor_number = set()
+for n in range(1, 10001):
+    constructor_number.add(d(n))
 
-# self_number 정의 = 전체숫자 - generated_number
-self_number -= generated_number
+# 전체 수 - 생성자가 있는 수 = 셀프넘버
+self_number = all_number - constructor_number
 
-# 출력
+# 셀프넘버 출력
 for number in sorted(self_number):
     print(number)
