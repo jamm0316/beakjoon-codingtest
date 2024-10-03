@@ -16,7 +16,7 @@ page link : [https://www.acmicpc.net/problem/1182](https://www.acmicpc.net/probl
 ## 🎨 사용된 알고리즘
 
 > [!tip]
-> DFS(Deepth-First Search): 깊이 우선 탐색
+> DFS(Depth-First Search): 깊이 우선 탐색
 
 
 ---
