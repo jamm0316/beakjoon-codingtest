@@ -1,4 +1,4 @@
-# 백트래킹을 이용한 부분수열의 합 계산
+# DFS를 이용한 부분수열의 합 계산
 def backtrack(idx, current_sum, count):
     global result
     
