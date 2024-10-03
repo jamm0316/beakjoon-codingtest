@@ -1,5 +1,5 @@
 # DFS를 이용한 부분수열의 합 계산
-def backtrack(idx, current_sum, count):
+def dfs(idx, current_sum, count):
     global result
     
   
@@ -8,9 +8,9 @@ def backtrack(idx, current_sum, count):
             result += 1
         return
 
-    backtrack(idx + 1, current_sum + sequence[idx], count + 1)
+    dfs(idx + 1, current_sum + sequence[idx], count + 1)
 
-    backtrack(idx + 1, current_sum, count)
+    dfs(idx + 1, current_sum, count)
 
 N, S = map(int, input().split())
 sequence = list(map(int, input().split()))
