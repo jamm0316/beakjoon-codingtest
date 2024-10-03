@@ -1,8 +1,4 @@
-[<back](https://www.notion.so/25239624ade64d8c86a9398a8d33a409?pvs=21)
-
----
-
-page link : https://www.acmicpc.net/problem/1182
+page link : [https://www.acmicpc.net/problem/1182](https://www.acmicpc.net/problem/1182)
 
 ---
 
