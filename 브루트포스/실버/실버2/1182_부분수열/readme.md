@@ -16,7 +16,7 @@ page link : [https://www.acmicpc.net/problem/1182](https://www.acmicpc.net/probl
 ## 🎨 사용된 알고리즘
 
 > [!tip]
-> [Back-Tracking: 백트래킹](https://www.notion.so/backtracking-114cda6b86ff8014b6b5d68fe6a5a46b?pvs=21)
+> DFS(Deepth-First Search): 깊이 우선 탐색
 
 
 ---
