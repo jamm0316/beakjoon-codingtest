@@ -1,0 +1,50 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
+
+public class MaxPermutation {
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // 입력 받기
+        int N = scanner.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(scanner.nextInt());
+        }
+        
+        scanner.close();
+        
+        // 순열 리스트 생성
+        List<List<Integer>> permutationsList = new ArrayList<>();
+        makePermutations(A, 0, permutationsList);
+        
+        // 최대 값 계산
+        int maxValue = 0;
+        for (List<Integer> perm : permutationsList) {
+            int total = 0;
+            for (int i = 0; i < N - 1; i++) {
+                total += Math.abs(perm.get(i) - perm.get(i + 1));
+            }
+            maxValue = Math.max(maxValue, total);
+        }
+        
+        // 결과 출력
+        System.out.println(maxValue);
+    }
+
+    private static void makePermutations(List<Integer> numbers, int index, List<List<Integer>> permutationsList) {
+        if (index == numbers.size() - 1) {
+            permutationsList.add(new ArrayList<>(numbers));
+            return;
+        }
+        
+        for (int i = index; i < numbers.size(); i++) {
+            Collections.swap(numbers, i, index);
+            makePermutations(numbers, index + 1, permutationsList);
+            Collections.swap(numbers, i, index); // 원래 순서로 복원
+        }
+    }
+}
