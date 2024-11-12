@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class P16938 {
+public class Main {
     static int N;
     static int minLevel;
     static int maxLevel;
