@@ -24,7 +24,7 @@ public class Main {
             problems[i] = Integer.parseInt(st.nextToken());
         }
 
-        System.out.println(bruteForceSelectProblems());
+        System.out.println(bitMaskSelectProblems());
     }
 
     static int bruteForceSelectProblems() {
