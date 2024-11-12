@@ -27,7 +27,7 @@ public class Main {
         System.out.println(bitMaskSelectProblems());
     }
 
-    static int bruteForceSelectProblems() {
+    static int bitMaskSelectProblems() {
         int count = 0;
 
         // 모든 가능한 문제 조합을 비트마스크로 탐색
