@@ -85,12 +85,10 @@ public class Main {
 2. 정렬방법
     1. java의 `Arrays.sort`는 2가지 방식으로 작동함.
         1. 기본형 자료구조: `ComparableTimSort.sort()` 방식.
-            
-            ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/6b8d40ba-5287-42be-84df-56b1c96a2c05/327faadd-ac9f-46ac-a8b2-88fac2589100/image.png)
-            
+            <img width="685" alt="image1" src="https://github.com/user-attachments/assets/bf077858-407e-4c49-b76e-1547db70d9e3">
+
         2. Object형 자료구조: `TimSort.sort()`방식(`Comparator`이용)
-            
-            ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/6b8d40ba-5287-42be-84df-56b1c96a2c05/589ff669-ebd4-41ea-9ece-27b935eea540/image.png)
+            <img width="659" alt="image2" src="https://github.com/user-attachments/assets/1a539f8b-0526-42a3-839a-5f441e8e2ef7">
             
     2. 가장 큰 차이는 `Comparator<Generic>`인 `c`의 존재 여부를 따진다.
         1. 존재하면 `ComparableTimSort.sort()`함수를 호출하고, 존재하지 않으면 `LegacyMergeSort`를 사용할 것인지 `TimSort`를 사용할 것인지 정한다.
@@ -100,7 +98,7 @@ public class Main {
     1. 따라서, `Comparator`를 사용하지 않으면 `ComparableTimsort.sort()`가 호출되어, 자연스러운 순서(오름차순)으로 정렬되고, `Compatator`를 사용하면, 사용자가 순서를 지정할 수 있다.
     2. `Comparator`의 경우 `interface`형태로 여러가지 메서드를 가지고 있지만 추상메서드는 1개 뿐이다.
         
-        ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/6b8d40ba-5287-42be-84df-56b1c96a2c05/a3c58209-e499-4f19-9a0e-7427c7a4e13f/image.png)
+        <img width="684" alt="image3" src="https://github.com/user-attachments/assets/9fdb3fe9-afdf-4aa8-9909-8dca3f66b16a">
         
         즉, `FunctionalInterface`(함수형 인터페이스)로 추상메서드를 1개만 갖는 인터페이스의 경우, 익명함수 선언이 가능하다.
         익명함수는 람다식으로 표현인 가능하다.
