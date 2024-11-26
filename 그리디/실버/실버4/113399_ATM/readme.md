@@ -38,9 +38,7 @@ public class Main {
             personList.add(Integer.parseInt(st.nextToken()));
         }
 
-//        personList.sort((a, b) -> a- b);
-        personList.sort((a, b) -> Integer.compare(a, b));
-//        Collections.sort(personList);
+        personList.sort(Comparator.naturalOrder());
 
         for (Integer time : personList) {
             prefixSum += time;
