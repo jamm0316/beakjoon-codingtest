@@ -1,64 +1,63 @@
 import java.util.*;
+import java.io.*;
 
 public class Main {
-    static ArrayList<Integer>[] graph;
-    static boolean[] visited;
+    static int nodes;
+    static int links;
+    static int startNode;
+    static List<Integer>[] graph;
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int nodes = sc.nextInt();
-        int edges = sc.nextInt();
-        int startNode = sc.nextInt();
-
+        nodes = Integer.parseInt(st.nextToken());
+        links = Integer.parseInt(st.nextToken());
+        startNode = Integer.parseInt(st.nextToken());
         graph = new ArrayList[nodes + 1];
         for (int i = 1; i <= nodes; i++) {
             graph[i] = new ArrayList<>();
         }
 
-        for (int i = 0; i < edges; i++) {
-            int a = sc.nextInt();
-            int b = sc.nextInt();
+        for (int i = 0; i < links; i++) {
+            st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
             graph[a].add(b);
-            graph[b].add(a);
+            graph[b].add(a); // 양방향 그래프
         }
 
         for (int i = 1; i <= nodes; i++) {
-            Collections.sort(graph[i]);
+            graph[i].sort(Comparator.naturalOrder());
         }
 
-        visited = new boolean[nodes + 1];
-        ArrayList<Integer> dfsResult = new ArrayList<>();
-        dfs(startNode, dfsResult);
+        boolean[] visited = new boolean[nodes + 1];
 
-        System.out.println(String.join(" ", dfsResult.stream()
-                .map(String::valueOf)
-                .toArray(String[]::new)));
+        display(dfs(startNode, new ArrayList<>(), visited));
 
         visited = new boolean[nodes + 1];
-        ArrayList<Integer> bfsResult = bfs(startNode);
+        display(bfs(startNode, visited));
 
-        System.out.println(String.join(" ", bfsResult.stream()
-                .map(String::valueOf)
-                .toArray(String[]::new)));
+
     }
 
-    private static void dfs(int currentNode, ArrayList<Integer> route) {
-        visited[currentNode] = true;
-        route.add(currentNode);
+    private static List<Integer> dfs(int nextNode, List<Integer> route, boolean[] visited) {
+        visited[nextNode] = true;
+        route.add(nextNode);
 
-        for (int neighbor : graph[currentNode]) {
+        for (int neighbor : graph[nextNode]) {
             if (!visited[neighbor]) {
-                dfs(neighbor, route);
+                dfs(neighbor, route, visited);
             }
         }
+        return route;
     }
 
-    private static ArrayList<Integer> bfs(int startNode) {
-        ArrayList<Integer> route = new ArrayList<>();
+    private static List<Integer> bfs(int nextNode, boolean[] visited) {
+        List<Integer> route = new ArrayList<>();
         Queue<Integer> queue = new LinkedList<>();
-        visited[startNode] = true;
-        queue.add(startNode);
+        queue.add(nextNode);
+        visited[nextNode] = true;
 
         while (!queue.isEmpty()) {
             int currentNode = queue.poll();
@@ -71,7 +70,15 @@ public class Main {
                 }
             }
         }
-
         return route;
+    }
+
+
+        private static void display(List<Integer> finalGraph) {
+        String[] array = finalGraph.stream()
+                .map(String::valueOf)
+                .toArray(String[]::new);
+
+        System.out.println(String.join(" ", array));
     }
 }
