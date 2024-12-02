@@ -10,6 +10,10 @@ public class Main {
     public static void main(String[] args) throws IOException {
         initData();
         int[] prefixSum = makePrefixSum(sequenceNum, sequence);
+        calculatePrefixSum(prefixSum, queries);
+    }
+
+    private static void calculatePrefixSum(int[] prefixSum, int[][] queries) {
         for (int[] query : queries) {
             int start = query[0];
             int end = query[1];
