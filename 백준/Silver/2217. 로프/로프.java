@@ -2,15 +2,15 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int totalRopes = input.nextInt();
+        int totalRopes = Integer.parseInt(br.readLine());
         List<Integer> ropes = new ArrayList<>();
         int maxWeight = Integer.MIN_VALUE;
 
         for (int i = 0; i < totalRopes; i++) {
-            ropes.add(input.nextInt());
+            ropes.add(Integer.parseInt(br.readLine()));
         }
 
         ropes.sort(Comparator.naturalOrder());
