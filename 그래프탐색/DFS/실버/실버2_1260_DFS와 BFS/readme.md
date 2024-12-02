@@ -46,7 +46,93 @@ page link : [https://www.acmicpc.net/problem/1260](https://www.acmicpc.net/probl
 ---
 
 # code
+## Java
 
+```java
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    static int nodes;
+    static int links;
+    static int startNode;
+    static List<Integer>[] graph;
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        nodes = Integer.parseInt(st.nextToken());
+        links = Integer.parseInt(st.nextToken());
+        startNode = Integer.parseInt(st.nextToken());
+        graph = new ArrayList[nodes + 1];  //입력받는 수와 index맞추기 위함
+        for (int i = 1; i <= nodes; i++) {
+            graph[i] = new ArrayList<>();
+        }
+
+        for (int i = 0; i < links; i++) {
+            st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            graph[a].add(b);
+            graph[b].add(a); // 양방향 그래프
+        }
+
+        for (int i = 1; i <= nodes; i++) {
+            graph[i].sort(Comparator.naturalOrder());
+        }
+
+        boolean[] visited = new boolean[nodes + 1];  //node 실제 숫자
+        display(dfs(startNode, new ArrayList<>(), visited));
+
+        visited = new boolean[nodes + 1];
+        display(bfs(startNode, visited));
+
+    }
+
+    private static List<Integer> dfs(int nextNode, List<Integer> route, boolean[] visited) {
+        visited[nextNode] = true;
+        route.add(nextNode);
+
+        for (int neighbor : graph[nextNode]) {
+            if (!visited[neighbor]) {
+                dfs(neighbor, route, visited);
+            }
+        }
+        return route;
+    }
+
+    private static List<Integer> bfs(int nextNode, boolean[] visited) {
+        List<Integer> route = new ArrayList<>();
+        Queue<Integer> queue = new LinkedList<>();
+
+				// 시작 노드 처리
+        queue.add(nextNode);
+        visited[nextNode] = true;
+
+        while (!queue.isEmpty()) {
+            int currentNode = queue.poll();
+            route.add(currentNode);
+
+            for (int neighbor : graph[currentNode]) {
+                if (!visited[neighbor]) {
+                    visited[neighbor] = true;
+                    queue.add(neighbor);
+                }
+            }
+        }
+        return route;
+    }
+
+        private static void display(List<Integer> finalGraph) {
+        String[] array = finalGraph.stream()
+                .map(String::valueOf)
+                .toArray(String[]::new);
+
+        System.out.println(String.join(" ", array));
+    }
+}
+```
 ## Python
 
 ```python
@@ -109,7 +195,79 @@ if __name__ == '__main__':
 
 ## 해결한 오류
 
-### 1. set() 자료구조의 특징
+### 1. sort()함수의 3가지 구현방법(Java)
+
+`ArrayList.sort(Comparator)`
+
+- 여기서 Comparator는 Functional Interface로 Comparator를 구현해야함.
+- 구현방법 3가지
+    - 람다식 → 정수 출력
+        
+        ```java
+        arr.sort((a, b) -> a - b);
+        ```
+        
+    - 람다식 → 비교
+        
+        ```java
+        arr.sort((a, b) -> Integer.Compare(a, b));
+        ```
+        
+    - API사용
+        
+        ```java
+        arr.sort(Comparator.naturalOrder());
+        ```
+        
+
+**람다식(정수 반환) 사용시 문제점**
+
+- 두 수의 차가 `Integer`의 범위 이상으로 넘어가면, 오버플로우가 일어난다
+    
+    **예시**
+    
+    ```java
+    import java.util.*;
+    
+    public class test {
+        public static void main(String[] args) {
+            ArrayList<Integer> arr = new ArrayList<>();
+            arr.add(-3);
+            arr.add(Integer.MAX_VALUE);
+            arr.sort((a, b) -> a - b);  // 계산: -3 - Integer.MAX_VALUE
+            System.out.println(arr);
+        }
+    }
+    ```
+    
+    **실행결과**
+    
+    ```java
+    [2147483647, -3]
+    ```
+    
+    - 이 경우 원한 결과는 오름차순(작은수 먼저)인데, a - b의 값이 오버플로우로 인해 음수를 반환하고, 이로인해 내림차순(큰수 먼저)으로 출력된 것을 확인 할 수 있다.
+
+**Integer.Compare() or Comparator.naturalOrder()의 비교방법**
+
+```java
+public static int compare(int x, int y) {
+    return (x < y) ? -1 : ((x == y) ? 0 : 1);
+}
+```
+
+- 실제 값을 비교하여 -1, 0, 1을 반환하기 때문에 오버플로우가 발생할 위험이 없다.
+
+**결론**
+
+1. **람다식 (a, b) -> a - b**는 간단한 방식이지만, 오버플로우로 인해 의도치 않은 정렬 결과가 발생할 수 있다.
+2. **안전한 대안**:
+    1. `Integer.compare(a, b)`
+    2. `Comparator.naturalOrder()`
+3. 표준 API를 사용하면 안정성과 가독성이 높아지므로 권장됨.
+4. 
+
+### 2. set() 자료구조의 특징 - Python
 
 `set` 자료 구조는 파이썬에서 **중복을 허용하지 않고**, **순서가 없는** 자료 구조. 
 
