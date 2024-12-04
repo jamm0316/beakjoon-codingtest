@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.io.*;
 
 public class Main {
     private static String compressQuadTree(char[][] matrix, int x, int y, int size) {
@@ -14,7 +14,7 @@ public class Main {
             }
             if (!same) break;
         }
-
+ 
         if (same) {
             return String.valueOf(firstValue);
         }
@@ -24,25 +24,27 @@ public class Main {
         String topRight = compressQuadTree(matrix, x, y + halfSize, halfSize);
         String bottomLeft = compressQuadTree(matrix, x + halfSize, y, halfSize);
         String bottomRight = compressQuadTree(matrix, x + halfSize, y + halfSize, halfSize);
-
         return "(" + topLeft + topRight + bottomLeft + bottomRight + ")";
     }
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        int N = Integer.parseInt(scanner.nextLine());
+        int N = Integer.parseInt(br.readLine());
         char[][] matrix = new char[N][N];
 
         for (int i = 0; i < N; i++) {
-            String line = scanner.nextLine();
+            String line = br.readLine();
             matrix[i] = line.toCharArray();
         }
 
         String result = compressQuadTree(matrix, 0, 0, N);
 
-        System.out.println(result);
+        bw.write(result);
+        bw.newLine();
 
-        scanner.close();
+        br.close();
+        bw.close();
     }
 }
