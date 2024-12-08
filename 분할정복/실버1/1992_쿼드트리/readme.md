@@ -90,8 +90,8 @@ public class Main {
 - 동일한 로직을 수행하는 큰 문제를 작게 나누어 해결한 뒤 다시 합친다
     - 동일한 로직의 반복 수행이라는 개념으로 인해 재귀로 해결하는 것이 자연스럽다
 
-![IMG_8246.jpeg](https://prod-files-secure.s3.us-west-2.amazonaws.com/6b8d40ba-5287-42be-84df-56b1c96a2c05/794e0361-7b11-4c0b-92c1-be88d504c595/IMG_8246.jpeg)
+<img width="526" alt="image" src="https://github.com/user-attachments/assets/10f2acf3-2b34-4605-884f-c5829dbb86b9">
 
 ### 2. 해당 문제 분할 정보 모식도
 
-![IMG_8247.jpeg](https://prod-files-secure.s3.us-west-2.amazonaws.com/6b8d40ba-5287-42be-84df-56b1c96a2c05/40382ac2-7918-4577-b225-f8fc816d7f4f/IMG_8247.jpeg)
+<img width="533" alt="image" src="https://github.com/user-attachments/assets/c3d0d075-5b83-4d11-a70b-7cd5a622356f">
