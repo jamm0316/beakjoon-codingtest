@@ -4,16 +4,15 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
         StringTokenizer st = new StringTokenizer(br.readLine());
+
         int N = Integer.parseInt(st.nextToken());
         int C = Integer.parseInt(st.nextToken());
-
         int[] arr = new int[N];
 
         for (int i = 0; i < N; i++) {
             st = new StringTokenizer(br.readLine());
-            arr[i] = Integer.parseInt(st.nextToken());
+            arr[i] = Integer.parseInt(st.nextToken());;
         }
 
         Arrays.sort(arr);
@@ -23,7 +22,7 @@ public class Main {
     }
 
     private static int findMaxDistance(int N, int C, int[] arr) {
-        int low  = 1;
+        int low = 1;
         int high = arr[N - 1] - arr[0];
         int result = 0;
 
@@ -47,7 +46,7 @@ public class Main {
             if (arr[i] - lastPosition >= distance) {
                 count++;
                 lastPosition = arr[i];
-                if (count >= routers) {
+                if (count == routers) {
                     return true;
                 }
             }
