@@ -18,8 +18,6 @@ public class Main {
             queries[i][1] = Integer.parseInt(st.nextToken());
         }
 
-        dp[0][0] = 0;
-        dp[0][1] = 1;
         for (int i = 0; i < dp.length; i++) {
             for (int j = 1; j < dp[i].length; j++) {
                 if (i == 0) {
