@@ -17,8 +17,8 @@ public class Main {
                 array.add(a);
             }
         }
-        array.sort((Comparator.comparingInt(String::length)
-                .thenComparing(Comparator.naturalOrder())));
+        array.sort(Comparator.comparingInt(String::length)
+                .thenComparing(Comparator.naturalOrder()));
 
         for (String str : array) {
             sb.append(str).append("\n");
