@@ -1,27 +1,26 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 public class Main {
     static class Position {
-        public int xPosition;
-        public int yPosition;
+        int x;
+        int y;
 
         public Position(int x, int y) {
-            this.xPosition = x;
-            this.yPosition = y;
+            this.x = x;
+            this.y = y;
         }
 
-        public int getXPosition() {
-            return xPosition;
+        public int getX() {
+            return x;
         }
 
-        public int getYPosition() {
-            return yPosition;
+        public int getY() {
+            return y;
         }
 
-        @Override
         public String toString() {
-            return xPosition + " " + yPosition;
+            return x + " " + y;
         }
     }
 
@@ -31,17 +30,17 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
 
         int N = Integer.parseInt(st.nextToken());
-        List<Position> array = new ArrayList<>();
+        List<Position> positions = new ArrayList<>();
 
         for (int i = 0; i < N; i++) {
             st = new StringTokenizer(br.readLine());
-            int x = Integer.parseInt(st.nextToken());
-            int y = Integer.parseInt(st.nextToken());
-            array.add(new Position(x, y));
+            int curX = Integer.parseInt(st.nextToken());
+            int curY = Integer.parseInt(st.nextToken());
+            positions.add(new Position(curX, curY));
         }
 
-        array.stream().sorted(Comparator.comparingInt(Position::getXPosition)
-                        .thenComparingInt(Position::getYPosition))
+        positions.stream()
+                .sorted(Comparator.comparingInt(Position::getX).thenComparing(Position::getY))
                 .forEach(p -> {
                     try {
                         bw.write(p.toString());
