@@ -1,13 +1,14 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-    
-        int N = input.nextInt();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        int N = Integer.parseInt(st.nextToken());
         int count = 0;
-    
+
         while (N >= 0) {
             if (N % 5 == 0) {
                 count += N / 5;
@@ -18,5 +19,7 @@ public class Main {
             count++;
         }
         System.out.println(-1);
+
+        br.close();
     }
 }
