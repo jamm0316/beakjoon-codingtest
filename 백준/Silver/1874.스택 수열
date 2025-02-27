@@ -1,0 +1,36 @@
+import java.io.*;
+import java.util.*;
+​
+public class Main {
+​
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb = new StringBuilder();
+		
+		Stack<Integer> stack = new Stack<>();
+		
+		int n = Integer.parseInt(br.readLine());
+		
+		int start = 0;
+		
+		while(n-- >0) {
+			int value = Integer.parseInt(br.readLine());
+			
+			// start+1부터 입력받은 value까지 push
+			if(value > start) {
+				for(int i=start+1; i<=value; i++) {
+					stack.push(i);
+					sb.append('+').append('\n');
+				}
+				start = value; // 다음 push를 위해 저장
+			} else if(stack.peek() != value) { // top 원소가 입력 받은 값과 다르면 종료
+				System.out.println("NO");
+				return;
+			}
+			
+			stack.pop();
+			sb.append('-').append('\n');
+		}
+		System.out.println(sb);
+	}
+}
