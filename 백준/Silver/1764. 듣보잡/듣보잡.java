@@ -9,45 +9,34 @@ public class Main {
 
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
-        Map<String, String> haveNotSeen = new HashMap<>();
-        Map<String, String> haveNotListen = new HashMap<>();
-        List<String> list = new ArrayList<>();
 
+        Set<String> unheard = new HashSet<>();
+        List<String> unseenUnheard = new ArrayList<>();
+
+        // 듣도 못한 사람 명단 입력
         for (int i = 0; i < N; i++) {
-            String name = br.readLine();
-            haveNotSeen.put(name, name);
+            unheard.add(br.readLine());
         }
 
+        // 보도 못한 사람 명단 입력 및 교집합 찾기
         for (int i = 0; i < M; i++) {
             String name = br.readLine();
-            haveNotListen.put(name, name);
-        }
-
-        if (haveNotSeen.size() < haveNotListen.size()) {
-            for (String name : haveNotSeen.keySet()) {
-                if (!haveNotListen.getOrDefault(name, "-1").equals("-1")) {
-                    list.add(name);
-                }
-            }
-        } else {
-            for (String name : haveNotListen.keySet()) {
-                if (!haveNotSeen.getOrDefault(name, "-1").equals("-1")) {
-                    list.add(name);
-                }
+            if (unheard.contains(name)) {
+                unseenUnheard.add(name);
             }
         }
-        list.sort(Comparator.naturalOrder());
 
-        bw.write(String.valueOf(list.size()));
-        bw.newLine();
-        list.stream().forEach(i -> {
-            try {
-                bw.write(i);
-                bw.newLine();
-            } catch (IOException e) {
-            }
-        });
+        // 사전순 정렬
+        Collections.sort(unseenUnheard);
 
+        // 결과 출력
+        StringBuilder sb = new StringBuilder();
+        sb.append(unseenUnheard.size()).append("\n");
+        for (String name : unseenUnheard) {
+            sb.append(name).append("\n");
+        }
+
+        bw.write(sb.toString());
         br.close();
         bw.close();
     }
