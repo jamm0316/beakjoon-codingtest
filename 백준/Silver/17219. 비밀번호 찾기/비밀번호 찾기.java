@@ -5,8 +5,8 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        StringTokenizer st = new StringTokenizer(br.readLine());
         StringBuilder sb = new StringBuilder();
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
@@ -20,11 +20,11 @@ public class Main {
         }
 
         for (int i = 0; i < M; i++) {
-            String target = br.readLine();
-            sb.append(map.get(target) + "\n");
+            String query = br.readLine();
+            sb.append(map.get(query) + "\n");
         }
         bw.write(sb.toString());
-        bw.close();
         br.close();
+        bw.close();
     }
 }
