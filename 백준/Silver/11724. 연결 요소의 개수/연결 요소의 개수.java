@@ -17,7 +17,6 @@ public class Main {
         // 그래프와 방문 배열 초기화
         for (int i = 0; i <= N; i++) {
             graph.add(new ArrayList<>());
-            visited[i] = false;
         }
 
         // 간선정보 저장
@@ -30,10 +29,10 @@ public class Main {
             graph.get(end).add(start);
         }
 
-        // dfs
+        // bfs
         for (int i = 1; i <= N; i++) {
             if (!visited[i]) {
-                visitConnectedComponentUsingDfs(i);
+                bfs(i);
                 links++;
             }
         }
@@ -41,12 +40,18 @@ public class Main {
         System.out.println(links);
     }
 
-    private static void visitConnectedComponentUsingDfs(int start) {
+    private static void bfs(int start) {
+        Queue<Integer> queue = new LinkedList<>();
+        queue.offer(start);
         visited[start] = true;
-        for (int neighbor : graph.get(start)) {
-            if (!visited[neighbor]) {
-                visited[neighbor] = true;
-                visitConnectedComponentUsingDfs(neighbor);
+
+        while (!queue.isEmpty()) {
+            int current = queue.poll();
+            for (int neighbor : graph.get(current)) {
+                if (!visited[neighbor]) {
+                    visited[neighbor] = true;
+                    queue.offer(neighbor);
+                }
             }
         }
     }
