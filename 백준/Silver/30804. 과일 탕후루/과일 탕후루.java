@@ -4,28 +4,22 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        Map<Integer, Integer> tanghuruMap = new HashMap<>();  //key: 종류, value: 갯수
         int N = Integer.parseInt(br.readLine());
-        int[] S = new int[N];
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < N; i++) {
-            S[i] = Integer.parseInt(st.nextToken());
-        }
+        int[] tanghuru = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
 
-        Map<Integer, Integer> countMap = new HashMap<>();
         int left = 0;
         int maxLength = 0;
-
         for (int right = 0; right < N; right++) {
-            countMap.put(S[right], countMap.getOrDefault(S[right], 0) + 1);
+            tanghuruMap.put(tanghuru[right], tanghuruMap.getOrDefault(tanghuru[right], 0) + 1);
 
-            while (countMap.size() > 2) {
-                countMap.put(S[left], countMap.get(S[left]) - 1);
-                if (countMap.get(S[left]) == 0) {
-                    countMap.remove(S[left]);
+            while (tanghuruMap.size() > 2) {
+                tanghuruMap.put(tanghuru[left], tanghuruMap.getOrDefault(tanghuru[left], 0) - 1);
+                if (tanghuruMap.get(tanghuru[left]) == 0) {
+                    tanghuruMap.remove(tanghuru[left]);
                 }
                 left++;
             }
-
             maxLength = Math.max(maxLength, right - left + 1);
         }
 
