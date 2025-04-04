@@ -52,7 +52,7 @@ page link : [https://www.acmicpc.net/problem/5525](https://www.acmicpc.net/probl
 
 ---
 
-# psudo code
+# pseudo code
 
 ```
 	1. 문자열을 1회 순회한다.
