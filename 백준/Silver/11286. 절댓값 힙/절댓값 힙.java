@@ -8,14 +8,8 @@ public class Main {
         StringBuilder sb = new StringBuilder();
 
         int N = Integer.parseInt(br.readLine());
-        Queue<Integer> queue = new PriorityQueue<>(
-                (a, b)-> {
-            if (Math.abs(a) == Math.abs(b)) {
-                return a - b;
-            } else {
-                return Math.abs(a) - Math.abs(b);
-            }
-        }
+        Queue<Integer> queue = new PriorityQueue<>((a, b)->
+            Math.abs(a) == Math.abs(b) ? a - b : Math.abs(a) - Math.abs(b)
         );
 
         for (int i = 0; i < N; i++) {
@@ -23,11 +17,7 @@ public class Main {
             if (command != 0) {
                 queue.add(command);
             } else {
-                if (queue.isEmpty()) {
-                    sb.append("0" + "\n");
-                } else {
-                    sb.append(queue.poll() + "\n");
-                }
+                sb.append(queue.isEmpty() ? 0 : queue.poll()).append('\n');
             }
         }
 
