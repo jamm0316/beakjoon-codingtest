@@ -14,9 +14,9 @@ public class Main {
         char[][] blindnessGraph = new char[N][N];
 
         for (int i = 0; i < N; i++) {
-            String line = br.readLine();
+            String tokens = br.readLine();
             for (int j = 0; j < N; j++) {
-                char color = line.charAt(j);
+                char color = tokens.charAt(j);
                 normalGraph[i][j] = color;
                 blindnessGraph[i][j] = (color == 'R') ? 'G' : color;
             }
@@ -35,7 +35,7 @@ public class Main {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
                 if (!visited[i][j]) {
-                    bfs(graph, visited, i, j);
+                    countColorBoundaryBfs(graph, visited, i, j);
                     count++;
                 }
             }
@@ -44,7 +44,7 @@ public class Main {
         return count;
     }
 
-    static void bfs(char[][] graph, boolean[][] visited, int i, int j) {
+    static void countColorBoundaryBfs(char[][] graph, boolean[][] visited, int i, int j) {
         Queue<int[]> queue = new LinkedList<>();
         queue.offer(new int[]{i, j});
         visited[i][j] = true;
