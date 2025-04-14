@@ -4,10 +4,10 @@ import java.util.*;
 public class Main {
     static int N, M;
     static List<Integer> sequence;
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     static StringBuilder sb = new StringBuilder();
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
         N = Integer.parseInt(st.nextToken());
@@ -17,18 +17,18 @@ public class Main {
         for (int i = 0; i < N; i++) {
             set.add(Integer.parseInt(st.nextToken()));
         }
+
         sequence = new ArrayList<>(set);
         sequence.sort(Comparator.naturalOrder());
 
-        sequenceDfs(new ArrayList<>(), 0);
+        backtrackDfs(new ArrayList<>(), 0);
 
         bw.write(sb.toString());
         bw.close();
         br.close();
-
     }
 
-    private static void sequenceDfs(List<Integer> result, int startIdx) {
+    private static void backtrackDfs(List<Integer> result, int startIdx) {
         if (result.size() == M) {
             for (int num : result) {
                 sb.append(num).append(" ");
@@ -36,9 +36,10 @@ public class Main {
             sb.append('\n');
             return;
         }
+
         for (int i = startIdx; i < sequence.size(); i++) {
             result.add(sequence.get(i));
-            sequenceDfs(result, i);  //현재 인덱스를 넘겨서 비내림차순 유지
+            backtrackDfs(result, i);
             result.remove(result.size() - 1);
         }
     }
