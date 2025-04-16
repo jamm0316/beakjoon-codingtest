@@ -1,20 +1,15 @@
 import java.util.*;
 
 public class Main {
-    static class Node implements Comparable<Node> {
+    static class Node {
         int to, cost;
-
         Node(int to, int cost) {
             this.to = to;
             this.cost = cost;
         }
-
-        public int compareTo(Node o) {
-            return this.cost - o.cost; // 비용 오름차순
-        }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt(); // 도시 수
@@ -39,7 +34,7 @@ public class Main {
         Arrays.fill(dist, Integer.MAX_VALUE);
         dist[start] = 0;
 
-        PriorityQueue<Node> pq = new PriorityQueue<>();
+        PriorityQueue<Node> pq = new PriorityQueue<>((a, b) -> a.cost - b.cost);
         pq.offer(new Node(start, 0));
 
         while (!pq.isEmpty()) {
