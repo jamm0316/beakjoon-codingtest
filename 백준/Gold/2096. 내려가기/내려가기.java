@@ -4,11 +4,11 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int N = Integer.parseInt(br.readLine());
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
+        int N = Integer.parseInt(br.readLine());
         int[][] maxDp = new int[2][3];
         int[][] minDp = new int[2][3];
-
         int[] input = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
         System.arraycopy(input, 0, maxDp[0], 0, 3);
         System.arraycopy(input, 0, minDp[0], 0, 3);
@@ -25,11 +25,11 @@ public class Main {
             minDp[cur][1] = Math.min(Math.min(minDp[prev][0], minDp[prev][1]), minDp[prev][2]) + input[1];
             minDp[cur][2] = Math.min(minDp[prev][1], minDp[prev][2]) + input[2];
         }
-
         int last = (N - 1) % 2;
         int max = Arrays.stream(maxDp[last]).max().getAsInt();
         int min = Arrays.stream(minDp[last]).min().getAsInt();
-
-        System.out.println(max + " " + min);
+        bw.write(max + " " + min);
+        bw.close();
+        br.close();
     }
 }
