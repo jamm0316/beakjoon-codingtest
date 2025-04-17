@@ -1,51 +1,63 @@
+import java.io.*;
 import java.util.*;
 
 public class Main {
     static class Node {
-        int to, cost;
-        Node(int to, int cost) {
-            this.to = to;
+        int nextCity, cost;
+        Node (int nextCity, int cost) {
+            this.nextCity = nextCity;
             this.cost = cost;
+        }
+
+        @Override
+        public String toString() {
+            final StringBuilder sb = new StringBuilder("Node{");
+            sb.append("nextCity=").append(nextCity);
+            sb.append(", cost=").append(cost);
+            sb.append('}');
+            return sb.toString();
         }
     }
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        int n = sc.nextInt(); // 도시 수
-        int m = sc.nextInt(); // 버스 수
-
-        List<List<Node>> graph = new ArrayList<>();
-        for (int i = 0; i <= n; i++) {
+    static StringTokenizer st;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        int M = Integer.parseInt(br.readLine());
+        List<List<Node>> graph = new ArrayList<>(N + 1);
+        for (int i = 0; i <= N; i++) {
             graph.add(new ArrayList<>());
         }
 
-        for (int i = 0; i < m; i++) {
-            int from = sc.nextInt();
-            int to = sc.nextInt();
-            int cost = sc.nextInt();
+        for (int i = 0; i < M; i++) {
+            st = new StringTokenizer(br.readLine());
+            int from = Integer.parseInt(st.nextToken());
+            int to = Integer.parseInt(st.nextToken());
+            int cost = Integer.parseInt(st.nextToken());
             graph.get(from).add(new Node(to, cost));
         }
 
-        int start = sc.nextInt();
-        int end = sc.nextInt();
+        st = new StringTokenizer(br.readLine());
+        int start = Integer.parseInt(st.nextToken());
+        int end = Integer.parseInt(st.nextToken());
 
-        int[] dist = new int[n + 1];
+        Queue<Node> queue = new PriorityQueue<>((a, b) -> a.cost - b.cost);
+        queue.offer(new Node(start, 0));
+        int[] dist = new int[N + 1];
         Arrays.fill(dist, Integer.MAX_VALUE);
         dist[start] = 0;
 
-        PriorityQueue<Node> pq = new PriorityQueue<>((a, b) -> a.cost - b.cost);
-        pq.offer(new Node(start, 0));
+        while (!queue.isEmpty()) {
+            Node curCity = queue.poll();
 
-        while (!pq.isEmpty()) {
-            Node now = pq.poll();
+            //현재 비용이 기존에 저장된 비용보다 더 크면 skip
+            if (curCity.cost > dist[curCity.nextCity]) continue;
 
-            if (now.cost > dist[now.to]) continue;
 
-            for (Node next : graph.get(now.to)) {
-                if (dist[next.to] > dist[now.to] + next.cost) {
-                    dist[next.to] = dist[now.to] + next.cost;
-                    pq.offer(new Node(next.to, dist[next.to]));
+            for (Node neighbor : graph.get(curCity.nextCity)) {
+                if (dist[neighbor.nextCity] > dist[curCity.nextCity] + neighbor.cost) {
+                    dist[neighbor.nextCity] = dist[curCity.nextCity] + neighbor.cost;
+                    queue.offer(new Node(neighbor.nextCity, dist[neighbor.nextCity]));
                 }
             }
         }
