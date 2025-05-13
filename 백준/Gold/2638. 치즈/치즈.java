@@ -17,12 +17,10 @@ public class Main {
         map = new int[N][M];
         visited = new boolean[N][M];
         for (int i = 0; i < N; i++) {
-            Arrays.fill(visited[i], true);
             st = new StringTokenizer(br.readLine());
             for (int j = 0; j < M; j++) {
                 map[i][j] = Integer.parseInt(st.nextToken());
                 if (map[i][j] == 1) {
-                    visited[i][j] = false;
                     totalCheese++;
                 }
             }
