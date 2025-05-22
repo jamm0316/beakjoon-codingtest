@@ -1,35 +1,33 @@
 import java.io.*;
-import java.util.*;
 
 public class Main {
     static int N, M;
     static StringBuilder sb = new StringBuilder();
+    static int[] selected;
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        N = Integer.parseInt(st.nextToken());
-        M = Integer.parseInt(st.nextToken());
+        String[] input = br.readLine().split(" ");
+        N = Integer.parseInt(input[0]);
+        M = Integer.parseInt(input[1]);
+        selected = new int[M];
 
-        dfs(1, new ArrayList<>());
-        bw.write(sb.toString());
-        bw.close();
-        br.close();
+        dfs(0, 1);
+        System.out.print(sb);
     }
 
-    private static void dfs(int start, List<Integer> list) {
-        if (list.size() == M) {
-            for (int i : list) {
-                sb.append(i).append(" ");
+    private static void dfs(int depth, int start) {
+        if (depth == M) {
+            for (int i = 0; i < M; i++) {
+                sb.append(selected[i]).append(' ');
             }
             sb.append('\n');
             return;
         }
 
         for (int i = start; i <= N; i++) {
-            list.add(i);
-            dfs(i, list);
-            list.remove(list.size() - 1);
+            selected[depth] = i;
+            dfs(depth + 1, i);
         }
     }
 }
