@@ -2,52 +2,56 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
+    static StringBuilder sb = new StringBuilder();
+    static int N;
+    static List<List<Integer>> tree;
+    static boolean[] visited;
+    static int[] parent;
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        StringBuilder sb = new StringBuilder();
 
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        int N = Integer.parseInt(st.nextToken());
-        List<Integer>[] graph = new ArrayList[N + 1];
+        N = Integer.parseInt(br.readLine());
+        tree = new ArrayList<>(N + 1);
+        visited = new boolean[N + 1];
+        parent = new int[N + 1];
+        for (int i = 0; i <= N; i++) {
+            tree.add(new ArrayList<>());
+        }
+
+        for (int i = 1; i < N; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int start = Integer.parseInt(st.nextToken());
+            int end = Integer.parseInt(st.nextToken());
+
+            tree.get(start).add(end);
+            tree.get(end).add(start);
+        }
+        bfs(1);
+
+        for (int i = 2; i <= N; i++) {
+            sb.append(parent[i]).append('\n');
+        }
+        bw.write(sb.toString());
+        bw.close();
+        br.close();
+    }
+
+    private static void bfs(int root) {
         Queue<Integer> queue = new LinkedList<>();
-        boolean[] visited = new boolean[N + 1];
-        int[] parents = new int[N + 1];
+        queue.offer(root);
+        visited[root] = true;
 
-        //initialize graph
-        for (int i = 1; i <= N; i++) {
-            graph[i] = new ArrayList<>();
-        }
-        for (int i = 0; i < N - 1; i++) {
-            st = new StringTokenizer(br.readLine());
-            int a = Integer.parseInt(st.nextToken());
-            int b = Integer.parseInt(st.nextToken());
-            graph[a].add(b);
-            graph[b].add(a);
-        }
-
-        //search graph
-        queue.add(1);
-        visited[1] = true;
         while (!queue.isEmpty()) {
-            int current = queue.poll();
-
-            for (int neighbor : graph[current]) {
-                if (!visited[neighbor]) {
-                    queue.add(neighbor);
-                    visited[current] = true;
-                    parents[neighbor] = current;
+            int now = queue.poll();
+            for (int next : tree.get(now)) {
+                if (!visited[next]) {
+                    visited[next] = true;
+                    parent[next] = now;
+                    queue.offer(next);
                 }
             }
         }
-
-        for (int i = 2; i <= N; i++) {
-            sb.append(parents[i]).append("\n");
-        }
-
-        bw.write(sb.toString());
-        bw.flush();
-        bw.close();
-        br.close();
     }
 }
