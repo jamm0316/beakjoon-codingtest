@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 import java.util.stream.*;
 
-public class Main {
+public class P15663_가독성_우선 {
     static int N, M;
     static boolean[] visited;
     static List<Integer> arr;
