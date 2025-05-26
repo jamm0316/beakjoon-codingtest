@@ -1,5 +1,5 @@
 -- 코드를 입력하세요
-select SUBSTR(PRODUCT_CODE, 1, 2) as CATEGORY, count(PRODUCT_CODE) as PRODUCTS
+select LEFT(PRODUCT_CODE, 2) as CATEGORY, count(PRODUCT_CODE) as PRODUCTS
 from PRODUCT
-group by SUBSTR(PRODUCT_CODE, 1, 2)
-order by SUBSTR(PRODUCT_CODE, 1, 2);
+group by LEFT(PRODUCT_CODE, 2)
+order by 1;
