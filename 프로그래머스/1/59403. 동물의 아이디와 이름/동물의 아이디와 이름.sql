@@ -1,3 +1,4 @@
 -- 코드를 입력하세요
-SELECT animal_id, name from animal_ins
+SELECT ANIMAL_ID, NAME
+from ANIMAL_INS
 order by 1;
