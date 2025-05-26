@@ -1,7 +1,6 @@
 -- 코드를 입력하세요
 select NAME, count(NAME) as count
 from ANIMAL_INS
-where NAME is not null
 group by NAME
 having count > 1
-order by 1;
+order by name asc;
