@@ -1,26 +1,33 @@
 import java.io.*;
 import java.util.*;
 
+/**
+ * 1. dp를 이용하여 해당 인덱스에서 증가하는 수열이 가장 큰 수를 저장
+ * 2. stream.max()로 가장 큰수 가져오기
+ * */
+
 public class Main {
+    static int N;
+    static int[] arr, dp;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int N = Integer.parseInt(br.readLine());
-        int[] sequence = Arrays.stream(br.readLine().split(" "))
-                .mapToInt(Integer::parseInt)
-                .toArray();
-
-        int[] dp = new int[N];
+        N = Integer.parseInt(br.readLine());
+        arr = new int[N];
+        dp = new int[N];
         Arrays.fill(dp, 1);
 
-        for (int i = 1; i < N; i++) {
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        for (int i = 0; i < N; i++) {
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+
+        for (int i = 0; i < N; i++) {
             for (int j = 0; j < i; j++) {
-                if (sequence[j] < sequence[i]) {
+                if (arr[j] < arr[i]) {
                     dp[i] = Math.max(dp[i], dp[j] + 1);
                 }
             }
         }
-
-        int lis = Arrays.stream(dp).max().getAsInt();
-        System.out.println(lis);
+        System.out.println(Arrays.stream(dp).max().getAsInt());
     }
 }
