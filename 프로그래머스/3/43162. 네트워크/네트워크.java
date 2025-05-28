@@ -1,25 +1,37 @@
+/*
+1. static 전체 네트워크 수, visited
+2. computers 순환하면서 
+  - !visited[start]일 때 start를 dfs 인자로 넘겨줌
+  - 이 조건에 들어오면 network++;
+*/
+
 import java.util.*;
 
 class Solution {
-    public int solution(int n, int[][] computers) {
-        boolean visited[] = new boolean[n];
-        int count = 0;
+    static int network;
+    static boolean[] visited;
+    static int N;
+    static int[][] computers;
+    public int solution(int n, int[][] input) {
+        visited = new boolean[n];
+        N = n;
+        computers = input;
         
-        for (int i = 0; i < computers.length; i++) {
+        for (int i = 0; i < n; i++) {
             if (!visited[i]) {
-                dfs(computers, visited, i);
-                count++;
+                dfs(i);
+                network++;
             }
         }
-        return count;
+        
+        return network;
     }
     
-    private static void dfs(int[][] computers, boolean[] visited, int node) {
-        visited[node] = true;
-        
-        for (int i = 0; i < computers.length; i++) {
-            if (computers[node][i] == 1 && !visited[i]) {
-                dfs(computers, visited, i);
+    static private void dfs(int start) {
+        visited[start] = true;
+        for (int i = 0; i < computers[start].length; i++) {
+            if (!visited[i] && computers[start][i] == 1) {
+                dfs(i);
             }
         }
     }
