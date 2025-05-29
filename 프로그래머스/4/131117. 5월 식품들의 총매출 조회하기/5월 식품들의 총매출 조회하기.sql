@@ -1,0 +1,6 @@
+-- 코드를 입력하세요
+SELECT p.PRODUCT_ID, p.PRODUCT_NAME, sum(p.PRICE * o.AMOUNT) AS TOTAL_SALES
+from FOOD_PRODUCT p join FOOD_ORDER o on (p.PRODUCT_ID = o.PRODUCT_ID)
+where DATE_FORMAT(o.PRODUCE_DATE, '%m') = '05'
+group by PRODUCT_ID
+order by TOTAL_SALES desc, PRODUCT_ID;
