@@ -1,46 +1,67 @@
 import java.util.*;
 
 class Solution {
-    public int solution(String begin, String target, String[] words) {
-        if (!Arrays.asList(words).contains(target)) return 0;
+    static class ConvertedWord {
+        String word;
+        int converedCount;
         
-        Queue<WordNode> queue = new LinkedList<>();
-        Set<String> visited = new HashSet<>();
+        ConvertedWord (String word, int converedCount) {
+            this.word = word;
+            this.converedCount = converedCount;
+        }
+        @Override
+        public String toString() {
+            return "ConvertedWord{"+word+","+converedCount+"}";
+         }
+    }
+    
+    static int N;
+    static List<String> words;
+    static boolean[] visited;
+    public int solution(String begin, String target, String[] input) {
+        N = input.length;
+        words = new ArrayList<>();
+        visited = new boolean[N];
+        for (String s : input) {
+            words.add(s);
+        }
         
-        queue.offer(new WordNode(begin, 0));
-        visited.add(begin);
+        //target이 없을 경우
+        if (!words.contains(target)) {
+            return 0;
+        }
+        
+        int result = bfs(begin, target);
+        return result;
+    }
+    
+    private static int bfs(String word, String target) {
+        Queue<ConvertedWord> queue = new LinkedList<>();
+        queue.offer(new ConvertedWord(word, 0));
+        int wordLength = word.length();
         
         while (!queue.isEmpty()) {
-            WordNode current = queue.poll();
+            ConvertedWord now = queue.poll();
+            if (now.word.equals(target)) {
+                return now.converedCount;
+            }
             
-            if (current.word.equals(target)) return current.step;
-            
-            for (String word : words) {
-                if (!visited.contains(word) && canTransform(current.word, word)) { 
-                    queue.offer(new WordNode(word, current.step + 1));
-                    visited.add(word);
+            for (int i = 0; i < N; i++) {
+                if (!visited[i]) {
+                    int count = 0;
+                    for (int j = 0; j < wordLength; j++) {
+                        if (words.get(i).charAt(j) == now.word.charAt(j)) {
+                            count++;
+                        }
                     }
+                    if (count == wordLength - 1) {
+                        queue.offer(new ConvertedWord(words.get(i), now.converedCount + 1));
+                        visited[i] = true;
+                    }
+                }
             }
         }
-        return 0;
-    }
-    
-    private boolean canTransform(String word1, String word2) {
-        int diff = 0;
-        for (int i = 0; i < word1.length(); i++) {
-            if (word1.charAt(i) != word2.charAt(i)) diff++;
-            if (diff > 1) return false;
-        }
-        return diff == 1;
-    }
-    
-    class WordNode {
-        String word;
-        int step;
         
-        WordNode(String word, int step) {
-            this.word = word;
-            this.step = step;
-        }
+        return 0;
     }
 }
