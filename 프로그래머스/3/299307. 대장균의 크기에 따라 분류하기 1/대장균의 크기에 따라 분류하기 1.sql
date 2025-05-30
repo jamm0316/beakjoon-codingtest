@@ -1,0 +1,13 @@
+-- 코드를 작성해주세요
+-- select *
+-- from ECOLI_DATA;
+
+
+select ID, 
+  CASE
+    WHEN SIZE_OF_COLONY <= 100 THEN 'LOW'
+    WHEN 100 < SIZE_OF_COLONY and SIZE_OF_COLONY <= 1000 THEN 'MEDIUM'
+    WHEN 1000 < SIZE_OF_COLONY THEN 'HIGH'
+  END AS SIZE
+from ECOLI_DATA
+order by ID;
