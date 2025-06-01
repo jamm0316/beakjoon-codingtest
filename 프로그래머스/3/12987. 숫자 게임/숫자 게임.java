@@ -1,6 +1,3 @@
-/*
-1. A수 보다 큰 수 들 중 가장 작은 수를 선택
-*/
 import java.util.*;
 
 class Solution {
@@ -8,17 +5,16 @@ class Solution {
     public int solution(int[] A, int[] B) {
         Arrays.sort(A);
         Arrays.sort(B);
-        
-        int aIdx = 0;
-        int bIdx = 0;
+        int aIdx = 0, bIdx = 0;
         
         while (aIdx < A.length && bIdx < B.length) {
-            if (B[bIdx] > A[aIdx]) {
-                score++;
+            if (A[aIdx] < B[bIdx]) {
                 aIdx++;
+                score++;
             }
             bIdx++;
         }
+        
         return score;
     }
 }
