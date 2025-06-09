@@ -4,29 +4,39 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-
-        int N = Integer.parseInt(st.nextToken());
-        List<List<Integer>> map = new ArrayList<>();
-
+        int N = Integer.parseInt(br.readLine());
+        List<List<Integer>> tree = new ArrayList<>();
         for (int i = 0; i < N; i++) {
-            map.add(new ArrayList<>());
-            st = new StringTokenizer(br.readLine());
-            for (int j = 0; j <= i; j++) {
-                int curNum = Integer.parseInt(st.nextToken());
-                map.get(i).add(curNum);
-                if (i > 0) {
-                    int left = (j > 0) ? map.get(i - 1).get(j - 1) : 0;
-                    int right = (j < i) ? map.get(i - 1).get(j) : 0;
-                    map.get(i).set(j, Math.max(left, right) + curNum);
+            tree.add(new ArrayList<>());
+        }
+        tree.get(0).add(Integer.parseInt(br.readLine()));
+
+        for (int i = 1; i < N; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int idx = 0;
+            while (st.hasMoreTokens()) {
+                int cur = Integer.parseInt(st.nextToken());
+                int prev = 0;
+                if (i == 1) {
+                    prev = tree.get(0).get(0);
+                    tree.get(1).add(cur + prev);
+                } else {
+                    if (idx == 0) {
+                        prev = tree.get(i - 1).get(idx);
+                        tree.get(i).add(cur + prev);
+                    } else if (idx == i) {
+                        prev = tree.get(i - 1).get(idx - 1);
+                        tree.get(i).add(cur + prev);
+                    } else {
+                        prev = Math.max(tree.get(i - 1).get(idx - 1), tree.get(i - 1).get(idx));
+                        tree.get(i).add(cur + prev);
+                    }
+                    idx++;
                 }
             }
         }
-        int maxSum = Collections.max(map.get(N - 1));
 
-        bw.write(String.valueOf(maxSum));
-        bw.close();
-        br.close();
+        Integer i = tree.get(N - 1).stream().max(Comparator.naturalOrder()).get();
+        System.out.println(i);
     }
 }
