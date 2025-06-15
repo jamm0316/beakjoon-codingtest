@@ -3,30 +3,28 @@ import java.io.*;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String A = br.readLine();
-        String B = br.readLine();
+        String origin = br.readLine();
+        String test = br.readLine();
 
-        int result = findLCSLength(A, B);
+        int result = findLCS(origin, test);
         System.out.println(result);
-
     }
 
-    private static int findLCSLength(String A, String B) {
-        int lenA = A.length();
-        int lenB = B.length();
+    private static int findLCS(String origin, String test) {
+        int N = origin.length();
+        int M = test.length();
 
-        int[][] dp = new int[lenA + 1][lenB + 1];
+        int[][] dp = new int[N + 1][M + 1];
 
-        for (int i = 1; i <= lenA; i++) {
-            for (int j = 1; j <= lenB; j++) {
-                if (A.charAt(i - 1) == B.charAt(j - 1)) {
+        for (int i = 1; i <= N; i++) {
+            for (int j = 1; j <= M; j++) {
+                if (origin.charAt(i - 1) == test.charAt(j - 1)) {
                     dp[i][j] = dp[i - 1][j - 1] + 1;
                 } else {
                     dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
                 }
             }
         }
-
-        return dp[lenA][lenB];
+        return dp[N][M];
     }
 }
