@@ -28,8 +28,11 @@ public class Main {
 
             if (sum > 0) {
                 right--;
-            } else {
+            } else if (sum < 0) {
                 left++;
+            } else {
+                System.out.println(ansL + " " + ansR);
+                return;
             }
         }
 
