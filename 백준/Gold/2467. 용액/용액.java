@@ -26,13 +26,13 @@ public class Main {
                 ansR = arr[right];
             }
 
-            if (sum > 0) {
-                right--;
+            if (sum == 0) {
+                System.out.println(ansL + " " + ansR);
+                return;
             } else if (sum < 0) {
                 left++;
             } else {
-                System.out.println(ansL + " " + ansR);
-                return;
+                right--;
             }
         }
 
