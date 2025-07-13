@@ -5,16 +5,17 @@ import java.util.StringTokenizer;
 public class Main {
     static int L, C;
     static char[] charArr;
-    static String vowel = "aeiou";
     static StringBuilder sb = new StringBuilder();
+    static String vowel = "aeiou";
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        StringTokenizer st = new StringTokenizer(br.readLine());
 
+        StringTokenizer st = new StringTokenizer(br.readLine());
         L = Integer.parseInt(st.nextToken());
         C = Integer.parseInt(st.nextToken());
+
         charArr = new char[C];
 
         st = new StringTokenizer(br.readLine());
