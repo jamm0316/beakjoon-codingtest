@@ -23,14 +23,12 @@ public class Main {
     static int[] dx = {-1, 1, 0, 0};
     static int[] dy = {0, 0, -1, 1};
     static Queue<Node> queue = new LinkedList<>();
-    static boolean[][] visited;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
-        visited = new boolean[N][M];
         dp = new int[N][M];
 
         for (int i = 0; i < N; i++) {
@@ -55,7 +53,7 @@ public class Main {
     private static int bfs(int x, int y) {
         int maxDistance = 0;
         queue.offer(map.get(x).get(y));
-        visited[x][y] = true;
+        dp[x][y] = 0;
 
         while (!queue.isEmpty()) {
             Node now = queue.poll();
@@ -64,8 +62,7 @@ public class Main {
                 int ny = now.y + dy[i];
 
                 if (0 <= nx && nx < N && 0 <= ny && ny < M && map.get(nx).get(ny).type == 'L'
-                && !visited[nx][ny]) {
-                    visited[nx][ny] = true;
+                && dp[nx][ny] == -1) {
                     dp[nx][ny] = dp[now.x][now.y] + 1;
                     maxDistance = Math.max(maxDistance, dp[nx][ny]);
                     queue.offer(map.get(nx).get(ny));
@@ -77,8 +74,7 @@ public class Main {
 
     private static void init() {
         for (int i = 0; i < N; i++) {
-            Arrays.fill(visited[i], false);
-            Arrays.fill(dp[i], 0);
+            Arrays.fill(dp[i], -1);
         }
     }
 }
