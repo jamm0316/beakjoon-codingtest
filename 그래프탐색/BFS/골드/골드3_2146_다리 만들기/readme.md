@@ -3,11 +3,13 @@ page link : [https://www.acmicpc.net/problem/2146](https://www.acmicpc.net/probl
 ---
 # 1차 성능 최적화 성과
 <img width="432" height="232" alt="image" src="https://github.com/user-attachments/assets/5a56cb87-36b4-4416-a015-eb79ffb79fec" />
+
 ## ✈️ 14배 속도 개선(4초 → 0.2초)
 ## 🌱 3.6배 메모리 절약(304MB → 84MB)
 
 # 2차 성능 최적화 성과
 <img width="426" height="146" alt="image" src="https://github.com/user-attachments/assets/f9401420-94a6-4d53-8d38-a01b0ee83149" />
+
 ## 🌱 4배 메모리 절약(84MB → 21MB)
 
 
