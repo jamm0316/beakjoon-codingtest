@@ -1,6 +1,15 @@
 page link : [https://www.acmicpc.net/problem/2146](https://www.acmicpc.net/problem/2146)
 
 ---
+# 1차 성능 최적화 성과
+<img width="432" height="232" alt="image" src="https://github.com/user-attachments/assets/5a56cb87-36b4-4416-a015-eb79ffb79fec" />
+## ✈️ 14배 속도 개선(4초 → 0.2초)
+## 🌱 3.6배 메모리 절약(304MB → 84MB)
+
+# 2차 성능 최적화 성과
+<img width="426" height="146" alt="image" src="https://github.com/user-attachments/assets/f9401420-94a6-4d53-8d38-a01b0ee83149" />
+## 🌱 4배 메모리 절약(84MB → 21MB)
+
 
 # 💡 풀이전략
 
@@ -121,7 +130,7 @@ public class Main {
 }
 ```
 
-# 🪄 해결한 오류
+# 🪄 1차 성능 최적화
 
 ## 1. edgeSet에 int[] (참조값)을 저장하여 중복값 제거 안됨
 
@@ -275,7 +284,44 @@ for (int i = 0; i < islandEdges.size(); i++) {
         }
     }
     ```
-    
+
+# 🪄 2차 성능 최적화
+
+## 1. visited[] 배열 재사용
+
+### 🔥 문제
+
+기존 코드의 경우 매번 new boolean[][]코드를 사용하여 메모리 새로 할당
+new 는 JVM 힙 메모리를 반복해서 소비하게 되며, CG 압박이 누적되면 성능 저하로 이어짐
+
+​
+**기존코드**
+    ```java
+    visited = new boolean[N][N];
+    ​```
+
+​
+
+### 🧯문제 해결
+
+따라서, Arrays.fill() 메서드를 사용해 이미 할당된 메모리 재사용
+
+​
+
+**수정된 코드**
+    ```java
+    for (int j = 0; j < N; j++) {
+        Arrays.fill(visited[j], false);
+    }
+    ```
+​
+
+## 2. edgsList에 LAND가 아닌 SEA 위치 저장
+
+첫번째 수정된 코드에서는 `map[nx][ny] == 0` 이면 edgeList에 LAND의 좌표를 저장함.
+그러나 두번째 코드에서는 SEA의 좌표를 저장함.
+
+따라서, 최종적으로 1번의 연산이 줄어들게 되고 visited 접근 수도 줄어들게됨.
 
 ---
 
