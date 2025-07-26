@@ -32,7 +32,6 @@ BFS, 시뮬레이션
 # 🧑🏻‍💻 code
 
 ## 2차 최적화 Java
-## :java:2차 최적화 Java
 
 ```java
 import java.io.*;
