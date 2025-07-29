@@ -2,75 +2,62 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    static int N, M, count;
-    static int[] dnaCondition = new int[4]; // A, C, G, T 최소 개수 조건
-    static int[] currentCount = new int[4]; // 현재 윈도우의 문자 개수
-    static String DNA;
+    static int[] checkArr = new int[4];       // A, C, G, T 최소 조건
+    static int[] myArr = new int[4];          // 현재 윈도우 문자 개수
+    static int checkSecret = 0;               // 조건 충족한 문자 수
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        N = Integer.parseInt(st.nextToken());
-        M = Integer.parseInt(st.nextToken());
-        DNA = br.readLine();
-        dnaCondition = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        int S = Integer.parseInt(st.nextToken());
+        int P = Integer.parseInt(st.nextToken());
+        char[] A = br.readLine().toCharArray();
 
-        // 초기 윈도우 설정 (첫 M개 문자)
-        for (int i = 0; i < M; i++) {
-            addChar(DNA.charAt(i));
+        st = new StringTokenizer(br.readLine());
+        for (int i = 0; i < 4; i++) {
+            checkArr[i] = Integer.parseInt(st.nextToken());
+            if (checkArr[i] == 0) checkSecret++;  // 0이면 자동 충족
         }
-        if (checkCondition()) {
-            count++;
+
+        // 초기 윈도우 설정
+        for (int i = 0; i < P; i++) {
+            add(A[i]);
         }
+
+        int result = 0;
+        if (checkSecret == 4) result++;
 
         // 슬라이딩 윈도우
-        for (int i = M; i < N; i++) {
-            // 이전 윈도우의 첫 문자 제거
-            removeChar(DNA.charAt(i - M));
-            // 새로운 문자 추가
-            addChar(DNA.charAt(i));
-            if (checkCondition()) {
-                count++;
-            }
+        for (int i = P; i < S; i++) {
+            int j = i - P;
+            add(A[i]);
+            remove(A[j]);
+            if (checkSecret == 4) result++;
         }
 
-        System.out.println(count);
+        System.out.println(result);
     }
 
     // 문자 추가
-    private static void addChar(char c) {
-        if (c == 'A') {
-            currentCount[0]++;
-        } else if (c == 'C') {
-            currentCount[1]++;
-        } else if (c == 'G') {
-            currentCount[2]++;
-        } else if (c == 'T') {
-            currentCount[3]++;
-        }
+    private static void add(char c) {
+        int idx = toIndex(c);
+        myArr[idx]++;
+        if (myArr[idx] == checkArr[idx]) checkSecret++;
     }
 
     // 문자 제거
-    private static void removeChar(char c) {
-        if (c == 'A') {
-            currentCount[0]--;
-        } else if (c == 'C') {
-            currentCount[1]--;
-        } else if (c == 'G') {
-            currentCount[2]--;
-        } else if (c == 'T') {
-            currentCount[3]--;
-        }
+    private static void remove(char c) {
+        int idx = toIndex(c);
+        if (myArr[idx] == checkArr[idx]) checkSecret--;
+        myArr[idx]--;
     }
 
-    // 조건 확인
-    private static boolean checkCondition() {
-        for (int i = 0; i < 4; i++) {
-            if (currentCount[i] < dnaCondition[i]) {
-                return false;
-            }
-        }
-        return true;
+    // 문자 → 인덱스 변환
+    private static int toIndex(char c) {
+        if (c == 'A') return 0;
+        else if (c == 'C') return 1;
+        else if (c == 'G') return 2;
+        else return 3;
     }
 }
