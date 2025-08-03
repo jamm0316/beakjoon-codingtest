@@ -5,8 +5,8 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
-        int T = Integer.parseInt(br.readLine());
 
+        int T = Integer.parseInt(br.readLine());
         while (T-- > 0) {
             String W = br.readLine();
             int K = Integer.parseInt(br.readLine());
@@ -16,7 +16,6 @@ public class Main {
                 charPos.add(new ArrayList<>());
             }
 
-            //각 문자별 인덱스 저장
             for (int i = 0; i < W.length(); i++) {
                 char c = W.charAt(i);
                 charPos.get(c - 'a').add(i);
@@ -24,8 +23,7 @@ public class Main {
 
             int min = Integer.MAX_VALUE;
             int max = -1;
-
-            for (int i = 0; i < 26; i++) {
+            for (int i = 0; i < charPos.size(); i++) {
                 List<Integer> list = charPos.get(i);
                 if (list.size() < K) continue;
 
@@ -45,7 +43,6 @@ public class Main {
                 sb.append(min).append(" ").append(max).append('\n');
             }
         }
-
         System.out.println(sb);
     }
 }
