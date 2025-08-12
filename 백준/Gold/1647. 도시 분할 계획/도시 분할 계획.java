@@ -1,11 +1,11 @@
 import java.io.*;
 import java.util.*;
 
-// BOJ 1647 도시 분할 계획
+// BOJ 1647 - 도시 분할 계획 (Prim + List<List<Edge>>)
 public class Main {
     static class Edge {
-        int a, b, w;
-        Edge(int a, int b, int w) { this.a = a; this.b = b; this.w = w; }
+        int to, w;
+        Edge(int to, int w) { this.to = to; this.w = w; }
     }
 
     static class FastScanner {
@@ -23,30 +23,11 @@ public class Main {
         }
         int nextInt() throws IOException {
             int c, sgn = 1, val = 0;
-            do { c = read(); } while (c <= ' ');    // skip spaces
+            do { c = read(); } while (c <= ' ');
             if (c == '-') { sgn = -1; c = read(); }
             while (c > ' ') { val = val * 10 + (c - '0'); c = read(); }
             return val * sgn;
         }
-    }
-
-    static int[] parent, size;
-
-    static int find(int x) {
-        while (x != parent[x]) {
-            parent[x] = parent[parent[x]]; // path halving
-            x = parent[x];
-        }
-        return x;
-    }
-
-    static boolean union(int a, int b) {
-        a = find(a); b = find(b);
-        if (a == b) return false;
-        if (size[a] < size[b]) { int t = a; a = b; b = t; }
-        parent[b] = a;
-        size[a] += size[b];
-        return true;
     }
 
     public static void main(String[] args) throws Exception {
@@ -54,32 +35,42 @@ public class Main {
         int N = fs.nextInt();
         int M = fs.nextInt();
 
-        Edge[] edges = new Edge[M];
+        List<List<Edge>> graph = new ArrayList<>(N + 1);
+        for (int i = 0; i <= N; i++) graph.add(new ArrayList<>());
+
         for (int i = 0; i < M; i++) {
-            int a = fs.nextInt();
-            int b = fs.nextInt();
-            int w = fs.nextInt();
-            edges[i] = new Edge(a, b, w);
+            int a = fs.nextInt(), b = fs.nextInt(), w = fs.nextInt();
+            graph.get(a).add(new Edge(b, w));
+            graph.get(b).add(new Edge(a, w));
         }
 
-        Arrays.sort(edges, Comparator.comparingInt(e -> e.w));
+        boolean[] visited = new boolean[N + 1];
+        PriorityQueue<Edge> pq = new PriorityQueue<>(Comparator.comparingInt(e -> e.w));
 
-        parent = new int[N + 1];
-        size = new int[N + 1];
-        for (int i = 1; i <= N; i++) { parent[i] = i; size[i] = 1; }
+        // 시작 정점을 (1, 비용 0)으로 넣어 가상의 0원 간선으로 시작
+        pq.offer(new Edge(1, 0));
 
-        long sum = 0;          // 안전하게 long
+        long sum = 0;
         int maxEdge = 0;
         int picked = 0;
 
-        for (Edge e : edges) {
-            if (union(e.a, e.b)) {
-                sum += e.w;
-                if (e.w > maxEdge) maxEdge = e.w;
-                if (++picked == N - 1) break; // MST 완성
+        while (!pq.isEmpty() && picked < N) {
+            Edge cur = pq.poll();
+            int u = cur.to;
+            if (visited[u]) continue;
+
+            visited[u] = true;
+            picked++;
+
+            sum += cur.w;
+            if (cur.w > maxEdge) maxEdge = cur.w;
+
+            for (Edge nxt : graph.get(u)) {
+                if (!visited[nxt.to]) pq.offer(nxt);
             }
         }
 
+        // MST 비용에서 가장 큰 간선 제거 → 두 마을로 분할한 최소 유지비
         System.out.println(sum - maxEdge);
     }
 }
