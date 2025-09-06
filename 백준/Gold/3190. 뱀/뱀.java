@@ -25,7 +25,7 @@ public class Main {
 
         Snake(int[] initPosition) {
             body = new LinkedList<>();
-            body.offerLast(initPosition);
+            body.offer(initPosition);
             direction = Dir.E;
         }
 
@@ -47,7 +47,7 @@ public class Main {
         public void move(int x, int y) {
             body.offer(new int[]{x, y});
             map[x][y] = 2;  //몸 표시
-            int[] tail = body.pollFirst();  //꼬리제거
+            int[] tail = body.poll();  //꼬리제거
             map[tail[0]][tail[1]] = 0; //맵에서 지우기
         }
 
