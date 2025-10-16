@@ -3,7 +3,8 @@ import java.util.*;
 
 public class Main {
     static int N, K;
-    static int[] dp, coinSet;
+    static int[] dp;
+    static TreeSet<Integer> coinSet = new TreeSet<>(); 
     static int INF = Integer.MAX_VALUE;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -11,7 +12,6 @@ public class Main {
         N = Integer.parseInt(st.nextToken());
         K = Integer.parseInt(st.nextToken());
 
-        TreeSet<Integer> coinSet = new TreeSet<>();
         for (int i = 0; i < N; i++) {
             int coin = Integer.parseInt(br.readLine());
             if (coin <= K) coinSet.add(coin);
