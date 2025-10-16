@@ -50,8 +50,6 @@ public class Main {
         PriorityQueue<Computer> pq = new PriorityQueue<>((a, b) -> a.cost - b.cost);
         pq.offer(new Computer(start, 0));
 
-        int infected = 1;
-        int totalCost = 0;
         while (!pq.isEmpty()) {
             Computer cur = pq.poll();
             if (cur.cost > dist[cur.end]) continue;
@@ -62,14 +60,14 @@ public class Main {
                 }
             }
         }
-        infected = (int) Arrays.stream(dist)
-                .filter(i -> i != INF)
-                .count();
-        IntStream.range(0, dist.length)
-                .forEach(i -> {
-                    if (dist[i] == INF) dist[i] = 0;
-                });
-        totalCost = Arrays.stream(dist).max().getAsInt();
-        return new int[]{infected, totalCost};
+        int infected = 0;
+        int maxTime = 0;
+        for (int i = 1; i <= N; i++) {
+            if (dist[i] != INF) {
+                infected++;
+                maxTime = Math.max(maxTime, dist[i]);
+            }
+        }
+        return new int[]{infected, maxTime};
     }
 }
