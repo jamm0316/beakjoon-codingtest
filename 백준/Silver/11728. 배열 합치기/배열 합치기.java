@@ -2,28 +2,31 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    static int N, M;
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
+        int[] A = new int[N];
+        int[] B = new int[M];
         StringBuilder sb = new StringBuilder();
-        N = Integer.parseInt(st.nextToken());
-        M = Integer.parseInt(st.nextToken());
-
-        PriorityQueue<Integer> pq = new PriorityQueue<>();
-        st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < N; i++) {
-            pq.offer(Integer.parseInt(st.nextToken()));
-        }
 
         st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < M; i++) {
-            pq.offer(Integer.parseInt(st.nextToken()));
+        for (int i = 0; i < N; i++) A[i] = Integer.parseInt(st.nextToken());
+
+        st = new StringTokenizer(br.readLine());
+        for (int i = 0; i < M; i++) B[i] = Integer.parseInt(st.nextToken());
+
+        int i = 0, j = 0;
+        while (i < N && j < M) {
+            if (A[i] <= B[j]) sb.append(A[i++]).append(" ");
+            else sb.append(B[j++]).append(" ");
         }
-        while (!pq.isEmpty()) {
-            sb.append(pq.poll()).append(" ");
-        }
+
+        while (i < N) sb.append(A[i++]).append(" ");
+        while (j < M) sb.append(B[j++]).append(" ");
+
         System.out.println(sb);
     }
 }
