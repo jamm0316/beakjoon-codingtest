@@ -36,11 +36,8 @@ public class Main {
     //소수 판정
     static private boolean isPrime(int x) {
         if (x < 2) return false;
-        if (x == 2 || x == 3) return true;
-        if (x % 2 == 0 || x % 3 == 0) return false;
-
-        for (int i = 5; (long) i * i <= x; i += 6) {
-            if (x % i == 0 || x % (i + 2) == 0) return false;
+        for (int i = 2; i * i <= x; i++) {
+            if (x % i == 0) return false;
         }
         return true;
     }
